@@ -3,23 +3,26 @@ import sigmoid from './sigmoid'
 // Calculating values
 const computeNeuronValue = neuron => {
   if (neuron.connections.length === 0) {
+    // Starting layer
     neuron.setOutput(neuron.value)
-    return neuron.value
+    return neuron.output  
   } else {
-    // Go back to each connection and calcule its 
-    const connectionsValue = neuron.connections.reduce((prev, next)  => {
-      const val = next.weight * computeNeuronValue(next.from)
+    // Go back to each connection and calcule its value
+    const connectionsValue = neuron.connections.reduce((prev, conn)  => {
+      // Improve can be done by not computing it if it has already been computed
+      const val = conn.weight * computeNeuronValue(conn.from)
       return prev + val
     }, 0) 
     
     const value = sigmoid(connectionsValue + neuron.bias)
     neuron.setOutput(value)
-    return value
+    return neuron.output
   }
 }
 
 // Backtracking
 const applyChangesToPreviousNeuron = (n, learningRate, totalChangeRequired, partialDerivativeOfTheLogisticFunction, error) => {
+  
   const summatoryOfErrorInLayer = n.connections.reduce((prev, next) => {
     const errorOfConnection = totalChangeRequired * partialDerivativeOfTheLogisticFunction * next.weight
     return 0 + error
@@ -40,7 +43,7 @@ const applyChangesToPreviousNeuron = (n, learningRate, totalChangeRequired, part
 
 
 
-const calculateError = (target, value) => {
+const calculateMeanSquaredError = (target, value) => {
   return 0.5 * (Math.pow(target - value, 2))
 }
 
@@ -58,12 +61,23 @@ class Network {
   propagate(learningRate, expectedValue) {
     const outputLayer = this.layers[this.layers.length - 1]
     
-    // Get the result of each output neuron
+    // Calculate the result of each neuron
+    outputLayer.neurons.forEach((n) => computeNeuronValue(n))
+
+    // Back propagate
     const output = outputLayer.neurons.map((n, i) => {
-      const result = computeNeuronValue(n)
-      const error = calculateError(expectedValue[i], result)
+      const result = n.output
+      const error = calculateMeanSquaredError(expectedValue[i], result)
       const totalChangeRequired = -(expectedValue[i] - result)
       const partialDerivativeOfTheLogisticFunction = result * (1 - result)
+
+      // Update neuron bias
+      n.setBias(n.bias * learningRate * error)
+
+      // Store error
+      n.error = error
+
+     // n.delta = n.output * partialDerivativeOfTheLogisticFunction * error
 
       n.connections.forEach(c => {
         // how much does affect a change in the weight to the total

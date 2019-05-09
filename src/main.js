@@ -38,7 +38,7 @@ const connectLayers = (layers) => {
 
 
 const inputLayer = createLayer(2)
-const hiddenLayers = [createLayer(16), createLayer(16)]
+const hiddenLayers = [createLayer(2), createLayer(2)]
 const outputLayer = createLayer(1)
 
 // Reset bias of inputlayer 
@@ -47,13 +47,13 @@ inputLayer.neurons.forEach(n => n.setBias(0))
 // Create the network
 const network = new Network(connectLayers([inputLayer].concat(hiddenLayers).concat([outputLayer])))
 
-const learningRate = 0.4
+const learningRate = 0.3
 
 let resulta, resultb,resultc, resultd;
 
 console.log('Training....')
 
-for(var i = 0; i < 20000; i ++) {
+for(var i = 0; i < 10000; i ++) {
   // 0,0 => 0
   network.activate([0,0]);
   resulta = network.propagate(learningRate, [0]);
