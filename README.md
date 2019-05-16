@@ -1,6 +1,8 @@
 # Neural Network in JavaScript
 
-This repo is a implementation of a neural network in javascript 
+Implementantion of a Perceptron neural network in JavaScript.
+
+
 
 WORK IN PROGRESS
 
@@ -9,6 +11,7 @@ https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/
 
 ## Neural networks
 https://scrimba.com/g/gneuralnetworks
+https://franpapers.com/en/machine-learning-ai-en/2017-neural-network-implementation-in-javascript-by-an-example/
 
 http://karpathy.github.io/neuralnets/
 
