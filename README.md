@@ -10,6 +10,8 @@ https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/
 ## Neural networks
 https://scrimba.com/g/gneuralnetworks
 
+http://karpathy.github.io/neuralnets/
+
 ## How to develop the application?
 
 ```bash
