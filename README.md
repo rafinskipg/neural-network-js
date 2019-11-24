@@ -21,10 +21,10 @@ const layers = [
   1 // Output
 ]
 
-const myNet = new Network(layers)
+const network = new Network(layers)
 
 // Start training
-const numberOfIterations = 2000
+const numberOfIterations = 20000
 
 // Training data for a "XOR" logic gate
 const trainingData = [{

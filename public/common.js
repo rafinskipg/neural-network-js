@@ -1,0 +1,1 @@
+module.exports = require('./dist/main.bundle.node.js').default

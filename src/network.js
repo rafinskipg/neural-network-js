@@ -71,7 +71,7 @@ class Network {
 
   run() {
     // For now we only use sigmoid function
-    this.runInputSigmoid()
+    return this.runInputSigmoid()
   }
 
   runInputSigmoid() {

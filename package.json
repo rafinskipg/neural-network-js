@@ -8,15 +8,16 @@
         "email": "rafinskipg@gmail.com",
         "url": "https://github.com/rafinskipg"
     },
-    "main": "./public/dist/main.bundle.js",
+    "main": "./public/common.js",
     "scripts": {
-        "audit": "source-map-explorer public/dist/main.bundle.js",
+        "audit": "source-map-explorer public/dist/main.bundle.web.js",
         "clear": "rm -rf public/dist/",
         "clear:all": "rm -rf node_modules/ && npm run clear",
         "count": "find src -name '*.js' | xargs wc -l | sort -r",
-        "build": "webpack",
+        "build": "webpack ",
+        "build:web": "webpack --config ./webpack.config.web.js",
         "watch": "webpack -w",
-        "start": "node public/dist/main.bundle.js",
+        "start": "node public/dist/main.bundle.node.js",
         "test": "jest --env=node"
     },
     "keywords": [
@@ -43,6 +44,7 @@
         "jest": "^24.9.0",
         "source-map-explorer": "^1.7.0",
         "webpack": "^4.29.6",
-        "webpack-cli": "^3.2.3"
+        "webpack-cli": "^3.2.3",
+        "webpack-node-externals": "^1.7.2"
     }
 }
