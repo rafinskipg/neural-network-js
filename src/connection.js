@@ -1,20 +1,26 @@
 class Connection {
-  constructor(from) {
+  constructor(from, to) {
     this.from = from
+    this.to = to
     this.weight = Math.random()
-    this.nextWeight = 0
+    this.change = 0
   }
 
-  setNextWeight (w) {
-    this.nextWeight = w
+  toJSON() {
+    return {
+      change: this.change,
+      weight: this.weight,
+      from: this.from.id,
+      to: this.to.id
+    }
   }
 
   setWeight(w) {
     this.weight = w
   }
 
-  applyUpdateOfWeight() {
-    this.weight = this.nextWeight
+  setChange(val) {
+    this.change = val
   }
 }
 

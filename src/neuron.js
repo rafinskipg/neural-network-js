@@ -1,10 +1,27 @@
 
+import uid from './uid'
 class Neuron {
-  constructor(value) {
-    this.value = value
-    this.connections = []
-    this.bias = this.getRandomBias()
+  constructor() {
+    this.inputConnections = []
+    this.outputConnections = []
+    this.bias = 0
+    // delta is used to store a percentage of change in the weight
+    this.delta = 0
     this.output = 0
+    this.error = 0
+    this.id = uid()
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      delta: this.delta,
+      output: this.output,
+      error: this.error,
+      bias: this.bias,
+      inputConnections: this.inputConnections.map(i => i.toJSON()),
+      outputConnections: this.outputConnections.map(i => i.toJSON())
+    }
   }
 
   getRandomBias() {
@@ -13,12 +30,12 @@ class Neuron {
     return Math.floor(Math.random() * (+max - +min)) +min; 
   }
 
-  addConnection(connection) {
-    this.connections.push(connection)
+  addInputConnection(connection) {
+    this.inputConnections.push(connection)
   }
 
-  setValue(val) {
-    this.value = val
+  addOutputConnection(connection) {
+    this.outputConnections.push(connection)
   }
 
   setBias(val) {
@@ -27,6 +44,14 @@ class Neuron {
 
   setOutput(val) {
     this.output = val
+  }
+
+  setDelta(val) {
+    this.delta = val
+  }
+
+  setError(val) {
+    this.error = val
   }
 }
 
